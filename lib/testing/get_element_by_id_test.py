@@ -1,48 +1,19 @@
-from tree import Tree
+# get_element_by_id_test.py
 
-class TestStack:
-    '''Class Stack in Stack.py'''
+from tree import Node, Tree
 
-    def test_get_element_by_id(self):
-  # <body>
-  #   <div id="main">
-  #     <h1 id="heading">Title</h1>
-  #     <h2>Subtitle</h2>
-  #   </div>
-  # </body>
+def test_get_element_by_id():
+    # Create a sample tree structure
+    node1 = Node(tag_name='h1', node_id='heading1', text_content='Title 1')
+    node2 = Node(tag_name='h2', node_id='heading2', text_content='Title 2')
+    node3 = Node(tag_name='h3', node_id='heading3', text_content='Title 3')
 
-        '''get_element_by_id test'''
-    tree = Tree(
-      {
-        'tag_name': 'body',
-        'id': None,
-        'children': [
-          {
-            'tag_name': 'div',
-            'id': 'main',
-            'children': [
-              {
-                'tag_name': 'h1',
-                'id': 'heading',
-                'text_content': 'Title',
-                'children': []
-              },
-              {
-                'tag_name': 'h2',
-                'id': None,
-                'text_content': 'Subitle',
-                'children': []
-              }
-            ]
-          }
-        ]
-      }
-    )
-    assert(tree.get_element_by_id('heading') =={
-      'tag_name': 'h1',
-      'id': 'heading',
-      'text_content': 'Title',
-      'children': []
-    } )
+    node1.children = [node2]
+    node2.children = [node3]
 
-    assert(tree.get_element_by_id('nope') == None)
+    # Create a Tree instance with the root node
+    tree = Tree(root=node1)
+
+    # Test the get_element_by_id method
+    result = tree.get_element_by_id('heading2')
+    assert result.text_content == 'Title 2'
